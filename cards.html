@@ -5,18 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cards 1 - 2019</title>
+    <style>
+        img {
+            height:50%;
+            margin:25px;
+            border: 2px solid #000;
+            border-radius: 8px;
+            box-shadow: 10px 10px 10px;
+        }
+    </style>
 </head>
 <body>
+    <button onclick="display()">Give me some cards!</button>
     <script>
         var suits = ['clubs','diamonds','hearts','spades'];
         var faces = ['ace','2','3','4','5','6','7','8','9','10','jack','queen','king'];
         var deck = [];
 
-        function playingCard(suit,face){
-            // code goes here
+        // https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+        function shuffle(a) {
+            var j, x, i;
+            for (i = a.length - 1; i > 0; i--) {
+                j = Math.floor(Math.random() * (i + 1));
+                x = a[i];
+                a[i] = a[j];
+                a[j] = x;
+            }
+            return a;
         }
 
-        // code goes here
+        function PlayingCard(suit,face){
+            this.suit = suit;
+            this.face = face;
+            this.image = face + '_of_' + suit + '.png';
+        }
+
+        for (let suit = 0 ; suit < suits.length ; suit++) {
+            for (let face = 0 ; face < faces.length ; face++) {
+                let card = new PlayingCard(suits[suit],faces[face]);
+                deck.push(card);
+            }
+        }
+
+        function display(){
+            for (let index = 0; index < 1000; index++) {
+                shuffle(deck);
+            }
+
+            for (let index = 0; index < deck.length; index++) {
+                document.write('<img src="img/' + deck[index].image + '">');
+            }
+        }
+        
         
     </script>
 </body>
